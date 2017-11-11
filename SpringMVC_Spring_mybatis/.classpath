@@ -26,5 +26,8 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mybatis/mybatis-3.2.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-core-asl-1.9.13.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jedis-2.4.1.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-pool2-2.4.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/spring-data-redis-1.4.1.RELEASE.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

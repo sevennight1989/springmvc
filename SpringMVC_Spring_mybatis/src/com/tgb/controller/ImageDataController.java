@@ -1,7 +1,9 @@
 package com.tgb.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +11,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.tgb.model.DataBean;
 import com.tgb.model.ImageBean;
 import com.tgb.service.ImageService;
+import com.tgb.service.impl.RedisCacheUtil;
 
 @Controller
 @RequestMapping("/img")
@@ -64,6 +68,8 @@ public class ImageDataController {
 	public ModelMap getImageData(){
 		ModelMap map = new ModelMap();
 		List<DataBean> dList ;
+
+		redisCache.setCacheObject("myname", "Tom");
 		try{
 			dList = imageService.getImageData();
 			map.put("responseCode", "0");
@@ -74,7 +80,13 @@ public class ImageDataController {
 			map.put("responseCode", "1");
 			map.put("responseMsg", "获取图片信息失败");
 		}
+		String value = redisCache.getCacheObject("myname");
+		System.out.println("value = " + value);
 		return map;
 	}
+
+	 @Autowired(required = true)
+	    private RedisCacheUtil<Object> redisCache;
+	 
 	
 }

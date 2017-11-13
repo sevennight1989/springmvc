@@ -16,5 +16,9 @@ public class ResPerson {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	@Override
+	public String toString() {
+		return "ResPerson [name=" + name + ", phone=" + phone + "]";
+	}
 	
 }

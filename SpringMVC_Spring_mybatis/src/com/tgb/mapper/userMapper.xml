@@ -61,4 +61,21 @@
 		select NAME,TAG,PHONE from tb_resPerson where TAG=#{tag}
 	</select>
 	
+	<resultMap type="com.tgb.model.ProBean" id="Pro">
+		<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+		<result column="APPROVECOMMENT" property="approveComment" jdbcType="VARCHAR"/>
+		<result column="OPERATETIME" property="operaTime" jdbcType="VARCHAR"/>
+		<result column="STATUS" property="status" jdbcType="VARCHAR"/>
+		<collection property="resPersons" ofType="com.tgb.model.ResPerson">
+			<result column="NAME" property="name" jdbcType="VARCHAR" />
+			<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+	
+
+	<select id="findProgress" resultMap="Pro">
+	select t1.TITLE,t1.APPROVECOMMENT,t1.OPERATETIME,t1.STATUS,t2.NAME,t2.PHONE
+	from tb_progress t1 LEFT JOIN tb_resperson t2 on t1.RESPERSONTAG=t2.TAG
+	</select>
+	
 </mapper>

@@ -34,28 +34,31 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("getProgress")
 	public ModelMap getProgressInfo() {
+	
+		
 		ModelMap map = new ModelMap();
 		map.put("code", "0");
 		map.put("message", "");
-		List<ProBean> lProBeans = new ArrayList<ProBean>();
-		List<ProBeanDTO> proBeanDTOList = userService.findProBean();
-		for(int i= 0;i<proBeanDTOList.size();i++){
-			ProBean proBean = new ProBean();
-			proBean.setTitle(proBeanDTOList.get(i).getTitle());
-			proBean.setMStatus(proBeanDTOList.get(i).getStatus());
-			proBean.setApproveComment(proBeanDTOList.get(i).getApproveComment());
-			proBean.setOperaTime(proBeanDTOList.get(i).getOperaTime());
-			List<ResPersonDTO> resPersonDTOList = userService.findResPerson(proBeanDTOList.get(i).getResPersonTAG());
-			List<ResPerson> resPersonList = new ArrayList<ResPerson>();
-			for(int j =0 ;j< resPersonDTOList.size();j++){
-				ResPerson resPerson = new ResPerson();
-				resPerson.setName(resPersonDTOList.get(j).getName());
-				resPerson.setPhone(resPersonDTOList.get(j).getPhone());
-				resPersonList.add(resPerson);
-			}
-			proBean.setResPersons(resPersonList);
-			lProBeans.add(proBean);
-		}
+//		List<ProBean> lProBeans = new ArrayList<ProBean>();
+//		List<ProBeanDTO> proBeanDTOList = userService.findProBean();
+//		for(int i= 0;i<proBeanDTOList.size();i++){
+//			ProBean proBean = new ProBean();
+//			proBean.setTitle(proBeanDTOList.get(i).getTitle());
+//			proBean.setMStatus(proBeanDTOList.get(i).getStatus());
+//			proBean.setApproveComment(proBeanDTOList.get(i).getApproveComment());
+//			proBean.setOperaTime(proBeanDTOList.get(i).getOperaTime());
+//			List<ResPersonDTO> resPersonDTOList = userService.findResPerson(proBeanDTOList.get(i).getResPersonTAG());
+//			List<ResPerson> resPersonList = new ArrayList<ResPerson>();
+//			for(int j =0 ;j< resPersonDTOList.size();j++){
+//				ResPerson resPerson = new ResPerson();
+//				resPerson.setName(resPersonDTOList.get(j).getName());
+//				resPerson.setPhone(resPersonDTOList.get(j).getPhone());
+//				resPersonList.add(resPerson);
+//			}
+//			proBean.setResPersons(resPersonList);
+//			lProBeans.add(proBean);
+//		}
+		List<ProBean> lProBeans = userService.findProgress();
 		map.put("data", lProBeans);
 		return map;
 	}

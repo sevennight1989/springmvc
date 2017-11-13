@@ -10,6 +10,13 @@ public class ProBean {
 	private List<ResPerson> resPersons;
 	private String status;
 	
+	@Override
+	public String toString() {
+		return "ProBean [approveComment=" + approveComment + ", operaTime="
+				+ operaTime + ", resPersons=" + resPersons + ", status="
+				+ status + ", title=" + title + "]";
+	}
+
 	public String getStatus() {
 		return status;
 	}

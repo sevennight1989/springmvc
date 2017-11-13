@@ -11,6 +11,7 @@ import com.tgb.dto.ProBeanDTO;
 import com.tgb.dto.ResPersonDTO;
 import com.tgb.dto.UserDTO;
 import com.tgb.mapper.UserMapper;
+import com.tgb.model.ProBean;
 import com.tgb.model.User;
 import com.tgb.service.UserService;
 
@@ -52,6 +53,10 @@ public class UserServiceImpl implements UserService {
 
 	public List<ResPersonDTO> findResPerson(String tag) {
 		return mapper.findResPerson(tag);
+	}
+
+	public List<ProBean> findProgress() {
+		return mapper.findProgress();
 	}
 	
 	

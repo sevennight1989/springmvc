@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tgb.dto.ProBeanDTO;
+import com.tgb.dto.ResPersonDTO;
 import com.tgb.dto.UserDTO;
 import com.tgb.mapper.UserMapper;
 import com.tgb.model.User;
@@ -37,13 +39,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void save(User user) {
-
 		mapper.save(user);
 	}
 
 	public boolean update(User user) {
-
 		return mapper.update(user);
+	}
+
+	public List<ProBeanDTO> findProBean() {
+		return mapper.findProBean();
+	}
+
+	public List<ResPersonDTO> findResPerson(String tag) {
+		return mapper.findResPerson(tag);
 	}
 	
 	

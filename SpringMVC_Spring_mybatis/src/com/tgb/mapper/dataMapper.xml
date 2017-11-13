@@ -16,4 +16,5 @@
 		select FILE_NAME,FILE_TYPEID,FORMAT,LOAN_ID,PADOC_ID,PAGE_NUM from tb_img
 	</select>
 
+	
 </mapper>

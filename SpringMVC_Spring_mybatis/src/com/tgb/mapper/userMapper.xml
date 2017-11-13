@@ -41,4 +41,24 @@
 		select user_id ,user_name ,user_age  from t_user
 	</select>
 	
+	<resultMap type="com.tgb.dto.ProBeanDTO" id="ProBeans">
+	<result column="TITLE" property="title" jdbcType="VARCHAR"/>
+	<result column="APPROVECOMMENT" property="approveComment" jdbcType="VARCHAR"/>
+	<result column="OPERATETIME" property="operaTime" jdbcType="VARCHAR"/>
+	<result column="STATUS" property="status" jdbcType="VARCHAR"/>
+	<result column="RESPERSONTAG" property="resPersonTAG" jdbcType="VARCHAR"/>
+	</resultMap>
+	<select id="findProBean" resultMap="ProBeans">
+		select TITLE,APPROVECOMMENT,OPERATETIME,STATUS,RESPERSONTAG from tb_progress
+	</select>
+	<resultMap type="com.tgb.dto.ResPersonDTO" id="ResPerson">
+	<result column="NAME" property="name" jdbcType="VARCHAR"/>
+	<result column="TAG" property="tag" jdbcType="VARCHAR"/>
+	<result column="PHONE" property="phone" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<select id="findResPerson" parameterType="String" resultMap="ResPerson">
+		select NAME,TAG,PHONE from tb_resPerson where TAG=#{tag}
+	</select>
+	
 </mapper>

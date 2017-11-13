@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tgb.dto.ProBeanDTO;
+import com.tgb.dto.ResPersonDTO;
 import com.tgb.dto.UserDTO;
 import com.tgb.model.ProBean;
 import com.tgb.model.ResPerson;
@@ -33,122 +35,31 @@ public class UserController {
 	@RequestMapping("getProgress")
 	public ModelMap getProgressInfo() {
 		ModelMap map = new ModelMap();
-
 		map.put("code", "0");
 		map.put("message", "");
 		List<ProBean> lProBeans = new ArrayList<ProBean>();
-		lProBeans.add(getProBean1());
-		lProBeans.add(getProBean2());
-		lProBeans.add(getProBean3());
-		lProBeans.add(getProBean4());
-		lProBeans.add(getProBean5());
+		List<ProBeanDTO> proBeanDTOList = userService.findProBean();
+		for(int i= 0;i<proBeanDTOList.size();i++){
+			ProBean proBean = new ProBean();
+			proBean.setTitle(proBeanDTOList.get(i).getTitle());
+			proBean.setMStatus(proBeanDTOList.get(i).getStatus());
+			proBean.setApproveComment(proBeanDTOList.get(i).getApproveComment());
+			proBean.setOperaTime(proBeanDTOList.get(i).getOperaTime());
+			List<ResPersonDTO> resPersonDTOList = userService.findResPerson(proBeanDTOList.get(i).getResPersonTAG());
+			List<ResPerson> resPersonList = new ArrayList<ResPerson>();
+			for(int j =0 ;j< resPersonDTOList.size();j++){
+				ResPerson resPerson = new ResPerson();
+				resPerson.setName(resPersonDTOList.get(j).getName());
+				resPerson.setPhone(resPersonDTOList.get(j).getPhone());
+				resPersonList.add(resPerson);
+			}
+			proBean.setResPersons(resPersonList);
+			lProBeans.add(proBean);
+		}
 		map.put("data", lProBeans);
 		return map;
 	}
 
-	private ProBean getProBean1() {
-		ProBean proBean_1 = new ProBean();
-		proBean_1.setTitle("提交申请");
-		proBean_1.setApproveComment("同意");
-		proBean_1.setOperaTime("2017-0511 11:21.02");
-		List<ResPerson> list1 = new ArrayList<ResPerson>();
-		ResPerson p1 = new ResPerson();
-		p1.setName("张三");
-		p1.setPhone("18913847525");
-		list1.add(p1);
-		ResPerson p2 = new ResPerson();
-		p2.setName("李四");
-		p2.setPhone("13813851421");
-		list1.add(p2);
-		ResPerson p3 = new ResPerson();
-		p3.setName("王五");
-		p3.setPhone("13851244458");
-		list1.add(p3);
-		proBean_1.setResPersons(list1);
-		proBean_1.setMStatus("0");
-		return proBean_1;
-	}
-	
-	private ProBean getProBean2() {
-		ProBean proBean_1 = new ProBean();
-		proBean_1.setTitle("小组审核");
-		proBean_1.setApproveComment("审核中");;
-		List<ResPerson> list1 = new ArrayList<ResPerson>();
-		ResPerson p1 = new ResPerson();
-		p1.setName("赵四");
-		p1.setPhone("15385127962");
-		list1.add(p1);
-		ResPerson p2 = new ResPerson();
-		p2.setName("刘能");
-		p2.setPhone("147581478965");
-		list1.add(p2);
-		proBean_1.setResPersons(list1);
-		proBean_1.setMStatus("0");
-		return proBean_1;
-	}
-	
-	private ProBean getProBean3() {
-		ProBean proBean_1 = new ProBean();
-		proBean_1.setTitle("部门审核");
-		List<ResPerson> list1 = new ArrayList<ResPerson>();
-		ResPerson p1 = new ResPerson();
-		p1.setName("谢广坤");
-		p1.setPhone("18569554122");
-		list1.add(p1);
-		ResPerson p2 = new ResPerson();
-		p2.setName("刘志");
-		p2.setPhone("18915745962");
-		list1.add(p2);
-		proBean_1.setResPersons(list1);
-		proBean_1.setMStatus("1");
-		return proBean_1;
-	}
-	
-	private ProBean getProBean4() {
-		ProBean proBean_1 = new ProBean();
-		proBean_1.setTitle("总部审核");
-		List<ResPerson> list1 = new ArrayList<ResPerson>();
-		ResPerson p1 = new ResPerson();
-		p1.setName("刘一水");
-		p1.setPhone("18569554122");
-		list1.add(p1);
-		ResPerson p2 = new ResPerson();
-		p2.setName("谢小梅");
-		p2.setPhone("18915745962");
-		list1.add(p2);
-		ResPerson p3 = new ResPerson();
-		p3.setName("王大拿");
-		p3.setPhone("18915745962");
-		list1.add(p3);
-		ResPerson p4 = new ResPerson();
-		p4.setName("杨小燕");
-		p4.setPhone("18915745962");
-		list1.add(p4);
-		proBean_1.setResPersons(list1);
-		proBean_1.setMStatus("1");
-		return proBean_1;
-	}
-	
-	private ProBean getProBean5() {
-		ProBean proBean_1 = new ProBean();
-		proBean_1.setTitle("董事长审核");
-		List<ResPerson> list1 = new ArrayList<ResPerson>();
-		ResPerson p1 = new ResPerson();
-		p1.setName("Tom");
-		p1.setPhone("18569554122");
-		list1.add(p1);
-		ResPerson p2 = new ResPerson();
-		p2.setName("Peter");
-		p2.setPhone("18915745962");
-		list1.add(p2);
-		ResPerson p3 = new ResPerson();
-		p3.setName("Vettel");
-		p3.setPhone("18915745962");
-		list1.add(p3);
-		proBean_1.setResPersons(list1);
-		proBean_1.setMStatus("1");
-		return proBean_1;
-	}
 	
 	/**
 	 * 获取所有用户列表
